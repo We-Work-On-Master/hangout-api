@@ -95,6 +95,17 @@ router.patch('/events/:id', requireToken, removeBlanks, (req, res, next) => {
     .catch(next)
 })
 
+router.patch('/events/rsvp/:id', requireToken, removeBlanks, (req, res, next) => {
+  console.log(req.params)
+  console.log(req.user.id)
+  Event.findByIdAndUpdate(req.params.id, { $push: { users: req.user.id } }, { new: true, useFindAndModify: false })
+    .then(handle404)
+    // if that succeeded, return 204 and no JSON
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
 // DESTROY
 // DELETE /events/5a7db6c74d55bc51bdf39793
 router.delete('/events/:id', requireToken, (req, res, next) => {

@@ -10,6 +10,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  events: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event'
+    }
+  ],
   token: String
 }, {
   timestamps: true,
