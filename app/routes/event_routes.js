@@ -45,7 +45,7 @@ router.get('/events', requireToken, (req, res, next) => {
 
 // INDEX SIGNED OUT
 // GET /events/
-router.get('/events/all', (req, res, next) => {
+router.get('/events/openall', (req, res, next) => {
   Event.find()
     .then(events => {
       // `events` will be an array of Mongoose documents
