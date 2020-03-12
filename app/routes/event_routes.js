@@ -55,8 +55,6 @@ router.get('/events/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-
-
 // INDEX SIGNED IN
 // GET /events
 router.get('/events', requireToken, (req, res, next) => {

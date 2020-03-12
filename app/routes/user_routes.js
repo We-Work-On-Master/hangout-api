@@ -159,4 +159,23 @@ router.delete('/sign-out', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+router.get('/user/:id', requireToken, (req, res, next) => {
+  User.findById(req.user.id)
+    .then(handle404)
+
+    .then(user => res.status(200).json({ user: user.toObject() }))
+
+    .catch(next)
+})
+
+// router.get('/events/:id', requireToken, (req, res, next) => {
+//   // req.params.id will be set based on the `:id` in the route
+//   Event.findById(req.params.id)
+//     .then(handle404)
+//     // if `findById` is succesful, respond with 200 and "event" JSON
+//     .then(event => res.status(200).json({ event: event.toObject() }))
+//     // if an error occurs, pass it to the handler
+//     .catch(next)
+// })
+
 module.exports = router
