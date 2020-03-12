@@ -141,6 +141,15 @@ router.patch('/users/rsvp/:id', requireToken, removeBlanks, (req, res, next) => 
     .catch(next)
 })
 
+router.patch('/users/unrsvp/:id', requireToken, removeBlanks, (req, res, next) => {
+  User.findByIdAndUpdate(req.user.id, { $pull: { events: req.params.id } }, { new: true, useFindAndModify: false })
+    .then(handle404)
+    // if that succeeded, return 204 and no JSON
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
 router.delete('/sign-out', requireToken, (req, res, next) => {
   // create a new random token for the user, invalidating the current one
   req.user.token = crypto.randomBytes(16)
