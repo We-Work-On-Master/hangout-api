@@ -96,9 +96,9 @@ router.patch('/events/:id', requireToken, removeBlanks, (req, res, next) => {
 })
 
 router.patch('/events/rsvp/:id', requireToken, removeBlanks, (req, res, next) => {
-  console.log(req.params)
-  console.log(req.user.id)
-  Event.findByIdAndUpdate(req.params.id, { $push: { users: req.user.id } }, { new: true, useFindAndModify: false })
+  // console.log(req.params)
+  // console.log(req.user.id)
+  Event.findByIdAndUpdate(req.params.id, { $addToSet: { users: req.user.id } }, { new: true, useFindAndModify: false })
     .then(handle404)
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))

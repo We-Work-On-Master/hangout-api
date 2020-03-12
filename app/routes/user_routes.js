@@ -21,6 +21,9 @@ const User = require('../models/user')
 // so that a token MUST be passed for that route to be available
 // it will also set `res.user`
 const requireToken = passport.authenticate('bearer', { session: false })
+const removeBlanks = require('../../lib/remove_blank_fields')
+const customErrors = require('../../lib/custom_errors')
+const handle404 = customErrors.handle404
 
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
@@ -126,6 +129,15 @@ router.patch('/change-password', requireToken, (req, res, next) => {
     // respond with no content and status 200
     .then(() => res.sendStatus(204))
     // pass any errors along to the error handler
+    .catch(next)
+})
+
+router.patch('/users/rsvp/:id', requireToken, removeBlanks, (req, res, next) => {
+  User.findByIdAndUpdate(req.user.id, { $addToSet: { events: req.params.id } }, { new: true, useFindAndModify: false })
+    .then(handle404)
+    // if that succeeded, return 204 and no JSON
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
     .catch(next)
 })
 
