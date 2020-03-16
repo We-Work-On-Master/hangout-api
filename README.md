@@ -37,9 +37,13 @@ Front-end:
 <br>
 </ol>
 
-**Wire Frames**
+**Wire Frames and ERD**
 
 <blockquote class="imgur-embed-pub" lang="en" data-id="a/X0bEtGq"><a href="https://imgur.com/a/JpEUSCa">Project 3 - Hangout Tracker - Wireframe</a></blockquote>
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/X0bEtGq"><a href="https://imgur.com/a/LmZemQJ
+">Project 3 - Hangout Tracker - ERD</a></blockquote>
+
 
 **User Stories**
 
