@@ -36,6 +36,7 @@ Front-end:
 <li>AJAX</li>
 <li>Git/GitHub</li>
 <li>Handlebars</li>
+<li>Moment</li>
 <br>
 </ol>
 
